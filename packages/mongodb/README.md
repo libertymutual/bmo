@@ -43,7 +43,7 @@ config: {
 		url,
 		databases: {
 			<database-name>: {
-				<collection-name>
+				<collection-name>: '<collection-name>'
 			}
 		}
   },
