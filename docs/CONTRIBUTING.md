@@ -21,6 +21,7 @@ No pull requests will be approved unless all tests and linting are passing.
 All contributions must follow (semantic versioning)[https://semver.org/] and appropriate version bumps must be included in your PR
 
 
+
 ## Other ways to get involved
 
 There are more ways to contribute to BMO than just new features. Bug fixes, additions to the documentation,

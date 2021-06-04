@@ -1,5 +1,6 @@
 import os from 'os'
 import ip from 'ip'
+import path from 'path'
 export default {
   di: {
     namespace: 'dependencies'
@@ -10,12 +11,18 @@ export default {
   server: {
     port: process.env.PORT || 3000,
     ip: ip.address(),
-    hostname: os.hostname()
+    hostname: os.hostname(),
+    staticFiles: []
   },
   swagger: {
     urls: {
       docs: '/api/docs',
-      ui: '/docs'
+      ui: '/docs',
+      redoc: '/redoc/redoc.standalone.js'
+    },
+    redoc: {
+      route: '/redoc',
+      baseDir: path.dirname(require.resolve('redoc'))
     }
   },
   events: {

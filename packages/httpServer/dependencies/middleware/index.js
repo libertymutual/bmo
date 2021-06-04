@@ -1,6 +1,7 @@
 
 import bodyparser from 'koa-bodyparser'
 import helmet from 'koa-helmet'
+import errorMapper from './errorMapper'
 import logger from './logger'
 import errorHandler from './errorHandler'
 export default [
@@ -24,5 +25,6 @@ export default [
       }
     }
   }) => bodyparser(bodyparserConfig),
-  logger
+  logger,
+  errorMapper
 ]

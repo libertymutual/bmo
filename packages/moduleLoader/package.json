@@ -1,12 +1,12 @@
 {
   "name": "@b-mo/module-loader",
-  "version": "0.5.0",
+  "version": "0.7.1",
   "description": "loads the modules defined by your configuration",
   "main": "index.js",
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/es6-require": "^0.5.0",
+    "@b-mo/es6-require": "^0.7.0",
     "lodash": "^4.17.15"
   },
   "publishConfig": {

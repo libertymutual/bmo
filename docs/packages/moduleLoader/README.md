@@ -1,4 +1,4 @@
-# BMO Module Loader
+# @b-mo/module-loader
 
 
 Loads the bmo modules defined in the package.json.

@@ -1,4 +1,4 @@
-import joi from '@hapi/joi'
+import joi from 'joi'
 import validator from '.'
 
 const schema = joi

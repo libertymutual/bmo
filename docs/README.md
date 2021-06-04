@@ -9,22 +9,15 @@ that allows developers to quickly modularize and customize their environment for
 
 ## Application Framework Features
 
--> Seamless support for common application requirements such as
-  -> 0 configuration ES6 Support, no build step required for nodejs apps.
-  -> Seamless dependency injection. No annotations, minimal bootstrapping, just code.
-  -> Modularize your setup. Re-use entire collections of dependencies across similar application types easily.
-  -> Consolidate and publish code into a single place to share it across projects!
-  -> Environment aware configuration flow provided out of the box.
-  -> Support for .env files.
-  -> And much more!
+Out of the box support for common application requirements such as:
+- 0 configuration ES6 Support, no build step required for nodejs apps.
+- Seamless dependency injection. No annotations, minimal bootstrapping, just code.
+- Modularize your setup. Re-use entire collections of dependencies across similar application types easily.
+- Environment aware configuration flow provided out of the box.
+- Built in support for .env files.
+- And much more!
 
-Checkout the [HelloWorld](/recipes/hellowWorld) recipe for a quick look at how to start writing applications with bmo today!
-
-
-Looking for something more Advanced?
-
-- [Extending dependency bundles](recipes/extendingBundles)
-- [Sharing code between projects](recipes/packages)
+Checkout the [HelloWorld](/recipes/helloWorld/) recipe for a quick look at how to start writing applications with bmo today!
 
 
 # Next Steps

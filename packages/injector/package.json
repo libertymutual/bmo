@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/injector",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "dependency injector for bmo",
   "main": "index.js",
   "files": [
@@ -11,11 +11,11 @@
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/es6-require": "^0.5.0",
-    "builtin-modules": "^3.1.0",
-    "espree": "^6.1.2",
-    "esquery": "^1.0.1",
-    "lodash": "^4.17.15",
+    "@b-mo/es6-require": "^0.7.0",
+    "builtin-modules": "^3.2.0",
+    "espree": "^7.3.1",
+    "esquery": "^1.4.0",
+    "lodash": "^4.17.20",
     "pkg-up": "^3.1.0"
   },
   "publishConfig": {

@@ -1,7 +1,13 @@
 # CHANGELOG
 
+v0.7.0
+- [CHORE] update dependencies. Align version numbers.
+
+v0.5.1
+- [UPDATE] Handle Object dependencies
+
 v0.5.0
-- [UPDATE] Package name
+- [UPDATE] Package name and version
 
 v0.1.2
  - [FIX] Issue with extending

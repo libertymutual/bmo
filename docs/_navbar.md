@@ -2,9 +2,13 @@
 * Packages
   * [CLI](/packages/cli/)
   * [Config](/packages/config/)
-  * [httpServer](/packages/httpServer/)
-  * [injector](/packages/injector/)
-  * [mocker](/packages/mocker/)
+  * [Http Server](/packages/httpServer/)
+  * [Bundle](/packages/bundle/)
+  * [Module Loader](/packages/moduleLoader/)
+  * [Injector](/packages/injector/)
+  * [Mocker](/packages/mocker/)
+* Extensions
+  * [Run](/packages/run/)
 * [Recipes](/recipes/)
   * [Microservice](/recipes/microservice/)
   * [Modules](/recipes/modules/)

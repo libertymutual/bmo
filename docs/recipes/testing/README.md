@@ -1,7 +1,7 @@
 # Testing
 
 It is recommended that you have some understanding of the BMO module structure before reading this.
-Checkout the [modules](/recipes/modules) documentation if you have not already done so.
+Checkout the [modules](/recipes/modules/) documentation if you have not already done so.
 
 One of the key benefits of using dependency injection is enhancing the testability of your codebase, but
 sometimes setting up the tests can become cumbersome and overly verbose, especially if your module

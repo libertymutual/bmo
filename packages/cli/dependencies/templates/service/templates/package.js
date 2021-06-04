@@ -1,4 +1,4 @@
-const base = ({ name, description, serverVersion, cliVersion }) => ({
+const base = ({ name, description }) => ({
   name: name,
   version: '1.0.0',
   description: description,
@@ -12,11 +12,6 @@ const base = ({ name, description, serverVersion, cliVersion }) => ({
   },
   author: '',
   license: 'SEE LICENSE.md',
-  dependencies: {
-    '@b-mo/cli': `^${cliVersion}`,
-    '@b-mo/http-server': `${serverVersion}`,
-    '@b-mo/extension-run': `${serverVersion}`
-  },
   devDependencies: {
     jest: '^24.8.0'
   },

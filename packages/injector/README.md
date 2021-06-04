@@ -1,4 +1,4 @@
-# BMO Injector
+# @b-mo/injector
 
 The DI or dependency injection that BMO supplies is meant to be totally unobtrusive.
 Simply attach your constructor to the root dependencies export, and deconstruct your modules dependencies

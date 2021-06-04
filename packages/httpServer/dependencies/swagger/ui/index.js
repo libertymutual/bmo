@@ -1,4 +1,4 @@
-export default ({ docs, base }) => `
+export default () => ({ docs, base, redoc }) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,7 +21,7 @@ export default ({ docs, base }) => `
   </head>
   <body>
     <redoc spec-url='${docs}'></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"> </script>
+    <script src="${redoc}"> </script>
   </body>
 </html>
 `

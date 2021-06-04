@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/extension-run",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "description": "runs a given dependency context",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,11 @@
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/bundle": "0.1.0",
-    "commander": "^5.1.0",
+    "@b-mo/bundle": "^0.7.0",
+    "commander": "^7.1.0",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.7"
   },
   "publishConfig": {
     "access": "public"

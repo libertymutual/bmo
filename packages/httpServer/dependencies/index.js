@@ -1,4 +1,4 @@
-import joi from '@hapi/joi'
+import joi from 'joi'
 import Koa from 'koa'
 import Router from 'koa-router'
 import commander from 'commander'
@@ -6,7 +6,6 @@ import pinoHttp from 'pino-http'
 
 import app from './app'
 import args from './args'
-import createSwaggerDefinition from './swagger/createSwaggerDefinition'
 import errors from './errors'
 import errorMap from './errorMap'
 import events from './events'
@@ -27,7 +26,6 @@ import stop from './stop'
 export default {
   args,
   commander: () => commander,
-  createSwaggerDefinition,
   errors,
   errorMap,
   events,

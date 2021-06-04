@@ -37,7 +37,7 @@ export default ({ dependencies: { packageman, logger }}) => async ({ name }) => 
     name: 'eslint',
     message: 'Would you like to run eslint on the project?'
   }]
-
+  const packages = [ '@b-mo/cli', '@b-mo/http-server', '@b-mo/extension-run' ]
   return {
     questions,
     preProcess: async ({ files, answers }) => {
@@ -58,6 +58,8 @@ export default ({ dependencies: { packageman, logger }}) => async ({ name }) => 
     postProcess: async ({ answers: { packageManager, eslint }}) => {
       logger.info('Installing dependencies...')
       packageman.use(packageManager)
+      await Promise.all(packages.map(async pkg => packageman.add(pkg)))
+
       await packageman.install()
       if (eslint) {
         logger.info('Running eslint...')

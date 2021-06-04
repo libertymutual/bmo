@@ -1,4 +1,4 @@
-import { has, each, set } from 'lodash'
+import { has, each, set, get } from 'lodash'
 import joi2Swagger from 'joi-to-swagger'
 import httpStatus from 'http-status-codes'
 
@@ -10,7 +10,16 @@ const SCHEMA_TYPES = {
   REQUEST_BODY: 'requestBody'
 }
 const { REQUEST_BODY, RESPONSE_BODY, QUERY_PARAMS } = SCHEMA_TYPES
-const { OK, CREATED, BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = httpStatus
+const {
+  OK,
+  CREATED,
+  BAD_REQUEST,
+  INTERNAL_SERVER_ERROR,
+  UNAUTHORIZED,
+  NO_CONTENT,
+  ACCEPTED
+} = httpStatus
+
 const OPEN_API_VERSION = '3.0.0'
 export default () => (routes, { title, description, contact, version }) => {
   const components = getComponents(routes, '', {})
@@ -78,7 +87,7 @@ const getQueryParams = route => {
   return params
 }
 
-const jsonSchema = (schema, description = 'Okay') => ({
+const jsonSchema = (schema, description) => ({
   description,
   content: {
     'application/json': {
@@ -92,39 +101,57 @@ const jsonSchema = (schema, description = 'Okay') => ({
 const requestBody = schema => `${schema}-${REQUEST_BODY}`
 
 const responseBody = schema => `${schema}-${RESPONSE_BODY}`
-
+const statusDescriptions = {
+  [OK]: 'OK',
+  [CREATED]: 'Created',
+  [ACCEPTED]: 'Accepted',
+  [NO_CONTENT]: 'No Content'
+}
 const DEFAULT_RESPONSES = {
   [BAD_REQUEST]: jsonSchema(`${responseBody('error')}`, 'Bad Request'),
   [UNAUTHORIZED]: jsonSchema(`${responseBody('error')}`, 'Unauthorized'),
   [INTERNAL_SERVER_ERROR]: jsonSchema(`${responseBody('error')}`, 'Internal Server Error')
 }
 
+const defaultHttpResponse = (schemaName, successStatusCode) => ({
+  [successStatusCode]: jsonSchema(`${responseBody(schemaName)}`, statusDescriptions[successStatusCode]),
+  ...DEFAULT_RESPONSES
+})
+const successStatus = 'successStatus'
 const formatters = {
-  get: schema => ({
+  delete: (schemaName, route = {}) => ({
     responses: {
-      [OK]: jsonSchema(`${responseBody(schema)}`),
-      ...DEFAULT_RESPONSES
+      ...defaultHttpResponse(schemaName, get(route, successStatus, OK))
     }
   }),
-  put: schema => ({
-    requestBody: jsonSchema(`${requestBody(schema)}`),
+  get: (schemaName, route) => ({
     responses: {
-      [OK]: jsonSchema(`${responseBody(schema)}`),
-      ...DEFAULT_RESPONSES
+      ...defaultHttpResponse(schemaName, get(route, successStatus, OK))
     }
   }),
-  post: schema => ({
-    requestBody: jsonSchema(`${requestBody(schema)}`),
+  put: (schemaName, route) => ({
+    requestBody: jsonSchema(`${requestBody(schemaName)}`),
     responses: {
-      [CREATED]: jsonSchema(`${responseBody(schema)}`),
-      ...DEFAULT_RESPONSES
+      ...defaultHttpResponse(schemaName, get(route, successStatus, OK))
+    }
+  }),
+  patch: (schemaName, route) => ({
+    requestBody: jsonSchema(`${requestBody(schemaName)}`),
+    responses: {
+      ...defaultHttpResponse(schemaName, get(route, successStatus, OK))
+    }
+  }),
+  post: (schemaName, route) => ({
+    requestBody: jsonSchema(`${requestBody(schemaName)}`),
+    responses: {
+      ...defaultHttpResponse(schemaName, get(route, successStatus, CREATED))
     }
   })
 }
 
-const formatRequestParams = (schemaName, httpMethod) => {
+const formatRequestParams = (schemaName, httpMethod, route) => {
   if (formatters[httpMethod]) {
-    return formatters[httpMethod](schemaName)
+    return formatters[httpMethod](schemaName, route)
   }
 }
 
@@ -138,13 +165,14 @@ const getPathDefinition = route => {
   const method = route.method.toLowerCase()
   let schemaDef = {}
   if (route.schema) {
-    schemaDef = formatRequestParams(schemaName, method)
+    schemaDef = formatRequestParams(schemaName, method, route)
   }
 
   return {
     key: `${formattedPath}.${method}`,
     value: {
       summary: `${schemaName}`,
+      description: route.description,
       parameters,
       ...schemaDef
     }

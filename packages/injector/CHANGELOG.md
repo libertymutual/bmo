@@ -1,4 +1,9 @@
 # CHANGELOG
+
+v0.7.0
+- [CHORE] update dependencies. Align version numbers.
+- [FIX] Bug where a dependency with the same name as a built in module would not be loaded.
+
 v0.6.1
 - [ADD] Ensure the bmo modules are run through the normal DI process.
 

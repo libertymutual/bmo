@@ -6,7 +6,9 @@ before_deploy:
 - git config --global user.name ${GITHUB_USER}
 - git remote set-url origin "https://${GITHUB_TOKEN}@github.com/libertymutual/bmo.git" > /dev/null 2>&1
 - git checkout master
-- echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+- npm config set access public
+- npm config set registry https://registry.npmjs.org
+- npm set //registry.npmjs.org/:_authToken "$NPM_API_TOKEN"
 - npm install
 deploy:
   provider: script

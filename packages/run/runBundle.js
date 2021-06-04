@@ -5,6 +5,7 @@ import { fork } from 'child_process'
 const esm = require.resolve('esm')
 
 commander
+  .storeOptionsAsProperties()
   .option('-d, --dev', 'Starts a watch on the base directory to look for changes')
   .allowUnknownOption()
 

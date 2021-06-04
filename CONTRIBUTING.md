@@ -19,3 +19,15 @@ All contributions should follow the existing style of the package and pass our e
 No pull requests will be approved unless all tests and linting are passing.
 
 All contributions must follow (semantic versioning)[https://semver.org/] and appropriate version bumps must be included in your PR
+
+
+
+## Other ways to get involved
+
+There are more ways to contribute to BMO than just new features. Bug fixes, additions to the documentation,
+new modules and extensions are just some of the other ways you can contribute. If you have an awesome extension
+or have written a new module we want to know!
+
+If you think updates to the docs are in order, feel free to follow the contributions guidelines above for documentation updates.
+The package docs are generated from the readmes in the root of each package. Just run `npm run copy:docs` to update the package docs.
+You can run the docs locally to make sure things look all right by running `npm run docs`.

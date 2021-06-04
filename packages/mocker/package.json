@@ -1,17 +1,15 @@
 {
   "name": "@b-mo/mocker",
-  "version": "0.5.1",
+  "version": "0.7.1",
   "description": "utility for testing bmo modules",
   "main": "index.js",
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/config": "^0.5.0",
-    "@b-mo/es6-require": "^0.5.0",
-    "@b-mo/injector": "^0.5.0",
-    "@b-mo/module-loader": "^0.5.0",
+    "@b-mo/bundle": "^0.7.1",
+    "@b-mo/injector": "^0.7.0",
     "dotenv": "^8.2.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.20"
   },
   "publishConfig": {
     "access": "public"

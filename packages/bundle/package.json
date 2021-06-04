@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/bundle",
-  "version": "0.1.1",
+  "version": "0.7.1",
   "description": "runs a given dependency context",
   "main": "index.js",
   "files": [
@@ -15,16 +15,12 @@
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/config": "^0.5.0",
-    "@b-mo/es6-require": "^0.5.0",
-    "@b-mo/injector": "^0.5.1",
-    "@b-mo/module-loader": "^0.5.0",
-    "commander": "^5.1.0",
-    "esm": "^3.2.25",
-    "fs-extra": "^9.0.0",
-    "lodash": "^4.17.15",
-    "lodash.merge": "^4.6.2",
-    "nodemon": "^2.0.4",
+    "@b-mo/config": "^0.7.0",
+    "@b-mo/es6-require": "^0.7.0",
+    "@b-mo/injector": "^0.7.0",
+    "@b-mo/module-loader": "^0.7.0",
+    "fs-extra": "^9.1.0",
+    "lodash": "^4.17.20",
     "pkg-up": "^3.1.0"
   },
   "publishConfig": {

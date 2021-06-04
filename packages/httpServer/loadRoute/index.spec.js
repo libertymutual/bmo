@@ -1,4 +1,4 @@
-import joi from '@hapi/joi'
+import joi from 'joi'
 import loadRoute from '.'
 class MockRouter {}
 MockRouter.prototype.get = jest.fn()

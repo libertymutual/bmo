@@ -1,6 +1,6 @@
 {
   "name": "b-mo",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "description": "Monorepo for managing packages in the @b-mo domain. ",
   "license": "Apache-2.0",
   "engines": {

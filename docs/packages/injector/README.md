@@ -1,4 +1,4 @@
-# BMO Injector
+# @b-mo/injector
 
 The DI or dependency injection that BMO supplies is meant to be totally unobtrusive.
 Simply attach your constructor to the root dependencies export, and deconstruct your modules dependencies
@@ -51,6 +51,11 @@ const manifest = await inject(config, dependencies)
 When the manifest is created the injector traverses your dependency tree injecting each modules dependencies
 eventually ending up with an object with all your build modules.
 
+### Package dependencies and built in modules:
+The injector will detect and load nodejs builtin modules into your dependency context for you.
+To use packages defined in your package.json, populate the 'pkg' key on your config with the package.json
+structure and the dependency injector will also automatically load any dependencies requested in modules.
+Some of the other tools will do this for you, but if you use this package directly you will need to load it yourself.
 
 ### Sub Contexts
 Sometimes it is useful to be able to create an isolated dependency context within your dependencies.
@@ -86,4 +91,3 @@ export default ({
 ### Any tools that modify the AST of your code may break dependency injection
 
 Using transpilers, minifiers, or uglifiers that modify the AST may or may not work. (probably won't)
-

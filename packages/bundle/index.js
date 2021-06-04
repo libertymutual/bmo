@@ -86,6 +86,7 @@ class Bundle {
     }
 
     this.resolved = resolve(this)
+    return this
   }
 
   async run(...runArgs) {
@@ -108,6 +109,19 @@ class Bundle {
 
   override({ dependencies, config }) {
     this._overrides = merge({}, this._overrides, { dependencies, config })
+    return this
+  }
+
+  get bundleDependencies() {
+    if (this.resolved) {
+      return this.resolved.dependencies
+    }
+
+    if (this.bundle) {
+      return this.bundle.dependencies
+    }
+
+    return {}
   }
 
   // Given the full dependency path return the part that exists in the bundle.
@@ -115,7 +129,7 @@ class Bundle {
     let ns
     const parts = path.split('.')
     do {
-      ns = get(this.bundle, parts.join('.'))
+      ns = get(this.bundleDependencies, parts.join('.'))
       if (!ns) {
         parts.pop()
       }
@@ -125,7 +139,7 @@ class Bundle {
   }
 
   getNamespaceForPath(path) {
-    return get(this.bundle, this.getBundlePathNamespace(path))
+    return get(this.bundleDependencies, this.getBundlePathNamespace(path))
   }
 
   add(path, module) {

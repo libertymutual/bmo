@@ -65,7 +65,7 @@ After this has been run through the dependency injector the resulting tree will 
 Another benefit to this style of declaring dependencies also makes unit testing a breeze. You can simply provide mock
 values for your dependencies and unit test with your favorite framework. Though once your get beyond trivial modules like the one above it may
 become cumbersome to mock everything out manually. For this we have provided a mocking framework that will allow you to target just the dependencies
-that require mocking you can check out the [docs](/packages/mocker/) or the [testing recipe](/recipes/testing) for more information.
+that require mocking you can check out the [docs](/packages/mocker/) or the [testing recipe](/recipes/testing/) for more information.
 
 # Sharing modules
 
@@ -77,5 +77,5 @@ be sure to populate to set add the following to the package's package.json:
 
 ```
 
-This will ensure that the module is compatible with the `bmo add` command and the [module loader](/packages/moduleLoader)
+This will ensure that the module is compatible with the `bmo add` command and the [module loader](/packages/moduleLoader/)
 

@@ -27,9 +27,13 @@ const loadDependency = async (manifest, name, dependency, dependencies, circleCh
     return manifest
   }
 
-  if (isBuiltIn(name)) {
+  if (isBuiltIn(name) && !has(dependencies, name)) {
     set(manifest, `${dependencyProperty}.${name}`, es6Require(name))
     return manifest
+  }
+
+  if (isBuiltIn(name) && has(dependencies, name)) {
+    console.warn(`Module: ${name} conflicts with built in module with the same name. The user supplied module will be used.`)
   }
 
   if (isPackageDependency({ pkg: get(manifest, 'config.pkg'), dependency: name })) {

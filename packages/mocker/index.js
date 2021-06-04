@@ -1,21 +1,23 @@
 import dotenv from 'dotenv'
 import bundle from '@b-mo/bundle'
-import { get, set, isArray, isObject, isFunction } from 'lodash'
+import { extract as extractDependencyNames } from '@b-mo/injector'
+import { get, set } from 'lodash'
 dotenv.config()
-const getMockPaths = (path, mocks, paths = []) => {
-  if (isFunction(mocks)) {
-    console.log(mocks)
-    paths.push(path)
-  } else if (isArray(mocks)) {
-    mocks.forEach((val, index) => getMockPaths(`${path}[${index}]`, val, mocks, paths))
-  } else if (isObject(mocks)) {
-    Object.keys(mocks).forEach(key => getMockPaths(`${path.length > 0 ? `${path}.` : ''}${key}`, mocks[key], paths))
-  }
+const getModules = ({
+  bundle,
+  mocks,
+  names
+}) => names.map(s => ({
+  key: s,
+  value: bundle.getNamespaceForPath(s)
+}))
+  .reduce((acc, { key, value }) => {
+    const mock = get(mocks, key)
+    set(acc, key, mock ? () => mock : value)
+    return acc
+  }, {})
 
-  return paths
-}
-
-export default ({ config, dependencies }) => {
+export default ({ config, dependencies } = {}) => {
   let bundleConfig = { ...config }
   let bundleDependencies = { ...dependencies }
   return {
@@ -34,28 +36,38 @@ export default ({ config, dependencies }) => {
       set(bundleDependencies, path, mock)
       return this
     },
+    async _loadRootBundle() {
+      if (this._rootBundle) {
+        return
+      }
+
+      const rootBundle = bundle()
+      if (this._root) {
+        rootBundle.setRoot(this._root)
+      }
+
+      this._rootBundle = rootBundle
+      await rootBundle.resolve()
+    },
     async build(module) {
       try {
+        await this._loadRootBundle()
         const mockBundle = bundle()
-        if (this._root) {
-          mockBundle.setRoot(this._root)
-        }
+        mockBundle.config(this._rootBundle.resolved.config)
+        mockBundle.override({ config: bundleConfig })
 
-        await mockBundle.load()
-        mockBundle.override({
-          config: bundleConfig
+        const dependencies = getModules({
+          bundle: this._rootBundle,
+          names: extractDependencyNames(module),
+          mocks: bundleDependencies
         })
-        mockBundle.add('module', module)
-        // Add parallel mocks namespace
-        mockBundle.add('mocks', bundleDependencies)
+
+        mockBundle.dependencies({
+          ...dependencies,
+          testMod: module
+        })
         await mockBundle.build()
-        const { mocks, ...dependencies } = mockBundle.manifest.dependencies
-        // Now merge the mocks back to the real dependencies.
-        getMockPaths('', mocks, [])
-          .forEach(path => {
-            set(dependencies, path, get(mocks, path))
-          })
-        const mod = dependencies.module
+        const mod = mockBundle.manifest.dependencies.testMod
         mod.manifest = mockBundle.manifest
         return mod
       } catch (e) {

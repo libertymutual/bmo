@@ -1,5 +1,7 @@
 # Hello World
 
+
+## Setup
 This guide will teach you the basics of running an application in the bmo framework.
 
 To get started ensure that you have node.js >= 10.16 installed.
@@ -26,6 +28,8 @@ After that, lets add a script to run our application in the scripts section of t
 }
 ```
 
+## Running
+
 Now when we run `npm run start` or `yarn start` our application will be invoked through the bmo cli.
 
 Now if we were try and start our application we would see a the following error:
@@ -40,6 +44,8 @@ All this means is that the cli could not find your dependency bundle.
 
 Before we go further lets learn a bit more about bmo's module system and dependency injection.
 
+### Modules
+
 It all starts with a dependency bundle. It is essentially an object where all of the leaf values are module functions IE:
 
 ```js
@@ -50,6 +56,7 @@ It all starts with a dependency bundle. It is essentially an object where all of
   }
 }
 ```
+
 During the startup process each module function is walked and its `dependencies` are inspected, and after
 ensuring that all the dependencies are available (by running the same algorithm) the module function will be called with the 'manifest'.
 The resulting value will be available for other modules in the manifest to consume.
@@ -94,6 +101,8 @@ export default {
 
 ** the bmo cli will automatically run your code using `esm` so you should not need any extra setup to use ES6 modules even if you
 are using older versions of node **
+
+## Adding dependencies
 
 For this tutorial we will just create an index.js file and export the dependencies, with one
  basic module:
@@ -141,7 +150,10 @@ Now when we run this we will see:
 Running....
 ```
 
+
 In the terminal, but no hello world. This is because we have yet to invoke the helloWorld dependency.
+
+## Using dependencies
 
 To do this we just need to declare the hello world module as a dependency of the run module. We do this simply
 by destructuring the value off of the manifest passed to the module function like so:
@@ -164,9 +176,13 @@ by destructuring the value off of the manifest passed to the module function lik
 
 And now we should see both of our log messages!
 
+
+## Next steps
+
 This example is trivial, but there are many advantages to using this pattern.
 Unit testing becomes a breeze since we have constructor level injection on our modules.
-Pair it with our [mocker framework](/packages/mocker) and getting 100% unit test coverage has never been easier.
+
+Pair it with our [mocker framework](/packages/mocker/) and getting 100% unit test coverage has never been easier.
 
 You can easily swap out or compose functionality together at runtime:
 
