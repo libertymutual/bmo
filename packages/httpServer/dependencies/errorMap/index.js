@@ -8,7 +8,8 @@ export default ({
         NOT_FOUND,
         INTERNAL_SERVER_ERROR,
         UNAUTHORIZED,
-        FORBIDDEN
+        FORBIDDEN,
+        PRECONDITION_FAILED
       }
     }
   }
@@ -17,14 +18,16 @@ export default ({
     Validation,
     Unauthenticated,
     Unauthorized,
-    NotFound
+    NotFound,
+    PreconditionFailed
   } = errors
   const map = {
     [BAD_REQUEST]: [ Validation ],
     [NOT_FOUND]: [ NotFound ],
     // The status code for unauthorized really means unauthenticated
     [UNAUTHORIZED]: [ Unauthenticated ],
-    [FORBIDDEN]: [ Unauthorized ]
+    [FORBIDDEN]: [ Unauthorized ],
+    [PRECONDITION_FAILED]: [ PreconditionFailed ]
   }
   return {
     get _map() {

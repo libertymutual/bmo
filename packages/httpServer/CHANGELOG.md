@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.4
+- [Update] Adding HTTP 412 Status to included http server errors
+
 v0.7.3
 - [Update] Routes may now define a 'successStatus' and the swagger generator will use that as the response status for the success in the documentation.
 
