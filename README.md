@@ -1,8 +1,3 @@
-# This is no long the main branch for this project. 
-
-### It has been moved to: https://github.com/bmo-node/bmo
-
-
 # BMO
 
 ## Overview
